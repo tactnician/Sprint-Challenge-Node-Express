@@ -1,8 +1,12 @@
 const express = require('express');
 
-server = express();
+const server = express();
 
 server.use(express.json());
+
+const projectRouter = require('./projects/projects-router');
+const actionRouter = require('./actions/actions-router');
+
 
 server.get('/', (req,res) => 
     res.send(`
@@ -12,5 +16,7 @@ server.get('/', (req,res) =>
     `)
 )
 
+server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionRouter);
 
 module.exports = server; 

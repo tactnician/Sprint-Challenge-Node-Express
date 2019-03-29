@@ -32,6 +32,20 @@ router.get('/:id', async (req, res) => {
 });
 
 
+//get Actions by project id 
+router.get('/:id/actions', async (req, res) => {
+    try {
+        // const {id} =  await req.params.id;
+        const resourceArr = await Projects.get(req.params.id);
+        console.log(" resource Array :" , resourceArr);
+        res.status(200).json(resourceArr.actions);
+    } catch (error) {
+        console.log(`error in get method ${error}`);
+        res.status(500).json({message: `error getting resources: ${error}`});
+    }
+});
+
+
 //insert()
 router.post('/', async (req, res) => {
     try {
